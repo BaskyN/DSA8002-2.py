@@ -3,6 +3,8 @@ import sqlite3
 import pandas as pandas
 import pandas as pd
 
+# here is a fake change you can review
+
 conn = sqlite3.connect("listings.db")
 c = conn.cursor()
 
@@ -20,7 +22,7 @@ CREATE TABLE IF NOT EXISTS airbnb
     (
     id INTEGER PRIMARY KEY,
     host_id INTEGER,
-    location_id INTEGER, 
+    location_id INTEGER,
     name TEXT,
     latitude TEXT,
     longitude TEXT,
@@ -35,7 +37,7 @@ CREATE TABLE IF NOT EXISTS airbnb
 
 CREATE TABLE IF NOT EXISTS hosts
     (
-    host_id INTEGER NOT NULL PRIMARY KEY,             
+    host_id INTEGER NOT NULL PRIMARY KEY,
     host_name TEXT NOT NULL,
     calculated_host_listings_count INTEGER NOT NULL
     );
@@ -59,15 +61,15 @@ SELECT DISTINCT host_id, host_name, calculated_host_listings_count FROM listings
 
 c.execute('''
 INSERT OR REPLACE INTO locations (neighbourhood, neighbourhood_group)
-SELECT DISTINCT neighbourhood, neighbourhood_group 
+SELECT DISTINCT neighbourhood, neighbourhood_group
 FROM listings
  ''')
 
 c.execute('''
-INSERT OR REPLACE INTO airbnb (id, host_id, name, location_id, latitude, longitude, room_type, price, minimum_nights, 
-number_of_reviews, last_review, reviews_per_month, availability_365) 
+INSERT OR REPLACE INTO airbnb (id, host_id, name, location_id, latitude, longitude, room_type, price, minimum_nights,
+number_of_reviews, last_review, reviews_per_month, availability_365)
 
-SELECT id, host_id, name, loc.location_id, latitude, longitude, room_type, price, minimum_nights, number_of_reviews, 
+SELECT id, host_id, name, loc.location_id, latitude, longitude, room_type, price, minimum_nights, number_of_reviews,
 last_review, reviews_per_month, availability_365 FROM listings li
 
 INNER JOIN locations loc on li.neighbourhood_group = loc.neighbourhood_group and li.neighbourhood = loc.neighbourhood
