@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker, relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -82,3 +82,5 @@ def loadSession():
 if __name__ == "__main__":
     session = loadSession()
     results = session.query(Locations).all()
+
+
