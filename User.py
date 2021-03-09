@@ -1,6 +1,7 @@
 import sqlite3
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.ext.declarative import declarative_base
+from SQAlchemy_model import Base
 
 engine = create_engine('sqlite:///listings.db', echo=True)
 Base = declarative_base(engine)
@@ -8,14 +9,20 @@ print(engine.table_names())
 
 
 class InHost:
-    def __(self):
-        print("name, host_id and listing count:")
-        self.pname = input("Enter Name:")
+    def __init__(self):
+        print("host_id, name and listing count:")
+
+        self.host_name = input("Enter Name:")
         self.listing_count_update = input("Enter Listing Count:")
 
     def PrintDetails(self):
         print("\n\n Name: ", self.name)
         print("Current Listing Count: ", self.listing_count_update)
+
+    def UpdateDatabase(self):
+
+
+
 
 
 class InProperty:

@@ -38,3 +38,27 @@ l = Listing.get(31114726)
 print(f"{l}")
 print("hello")
 
+
+
+
+
+
+    def __init__(self, location_id, neighbourhood, neighbourhood_group):
+        self.location_id = location_id
+        self.neighbourhood = neighbourhood
+        self.neighbourhood_group = neighbourhood_group
+
+
+def loadSession():
+    metadata = Base.metadata
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    return session
+
+
+if __name__ == "__main__":
+    session = loadSession()
+    results = session.query(Locations).all()
+
+
+
